@@ -3,6 +3,8 @@ const authRoute = require('./auth.route');
 const companiesRoute = require('./companies.route');
 const docsRoute = require('./docs.route');
 const soldiersRoute = require('./soldiers.route');
+const textRoute = require('./text.route');
+const townsRoute = require('./towns.route');
 const userRoute = require('./user.route');
 const config = require('../../config/config');
 
@@ -20,6 +22,14 @@ const defaultRoutes = [
   {
     path: '/soldiers',
     route: soldiersRoute,
+  },
+  {
+    path: '/text',
+    route: textRoute,
+  },
+  {
+    path: '/towns',
+    route: townsRoute,
   },
   {
     path: '/users',

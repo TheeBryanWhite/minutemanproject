@@ -14,12 +14,12 @@ const companySchema = mongoose.Schema(
       trim: true,
     },
     town: {
-      type: String,
+      type: Object,
       required: true,
       trim: true,
     },
     entered: {
-      type: String,
+      type: Object,
 	    required: true,
       trim: true,
     },
@@ -29,12 +29,12 @@ const companySchema = mongoose.Schema(
       trim: true,
     },
 	  textid1: {
-      type: Number,
+      type: Object,
       required: true,
       trim: true,
     },
 	  textid2: {
-      type: Number,
+      type: Object,
       required: true,
       trim: true,
     }

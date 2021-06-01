@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { 
 	setAccessToken,
+	setEmailVerified,
 	setRefreshToken,
 	setUsername
  } from '../../redux/actions';
@@ -75,8 +76,10 @@ class Login extends Component {
 			password: this.state.password
 		})
 		.then(function (response) {
+			console.log(response);
 			self.setState({loginError: false});
 			self.props.setAccessToken(response.data.tokens.access);
+			self.props.setEmailVerified(response.data.user.isEmailVerified);
 			self.props.setRefreshToken(response.data.tokens.refresh);
 			self.props.setUsername(response.data.user.name);
 			self.props.history.push({
@@ -167,12 +170,14 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
 	accessToken: state.tokenreducer.accessToken,
+	isEmailVerified: state.userreducer.isEmailVerified
 });
 	
 export default connect(
 	mapStateToProps, 
 	{
 		setAccessToken, 
+		setEmailVerified,
 		setRefreshToken, 
 		setUsername
 	}

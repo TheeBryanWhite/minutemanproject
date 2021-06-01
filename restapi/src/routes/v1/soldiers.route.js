@@ -237,31 +237,31 @@ module.exports = router;
 
 /**
  * @swagger
- * /companies/{id}:
+ * /soldiers/{id}:
  *   get:
- *     summary: Get a company
- *     tags: [Companies]
+ *     summary: Get a soldier
+ *     tags: [Soldiers]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Company id
+ *         description: Soldier id
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Company'
+ *                $ref: '#/components/schemas/Soldier'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a company
- *     description: Only admins can update companies.
- *     tags: [Companies]
+ *     summary: Update a soldier
+ *     description: Only admins can update soldiers.
+ *     tags: [Soldiers]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -270,7 +270,7 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: Companies id
+ *         description: Soldiers id
  *     requestBody:
  *       required: true
  *       content:
@@ -336,9 +336,9 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a company
- *     description: Only admins can delete companies.
- *     tags: [Companies]
+ *     summary: Delete a soldier
+ *     description: Only admins can delete soldiers.
+ *     tags: [Soldiers]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -347,7 +347,7 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: Company id
+ *         description: Soldier id
  *     responses:
  *       "200":
  *         description: No content

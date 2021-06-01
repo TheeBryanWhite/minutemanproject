@@ -42,18 +42,26 @@ class AllCompanies extends Component {
 						<Table aria-label="all users table">
 							<TableHead>
 								<TableRow>
+									<TableCell>ID</TableCell>
+									<TableCell>Compnum</TableCell>
 									<TableCell>Name</TableCell>
 									<TableCell>Town</TableCell>
 									<TableCell>Note</TableCell>
+									<TableCell>TextID 1</TableCell>
+									<TableCell>TextID 2</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
 								{
 								this.state.allCompanies.map((company, index) => (
 									<TableRow key={index}>
+										<TableCell component="th" scope="row">{company.id}</TableCell>
+										<TableCell component="th" scope="row">{company.compnum}</TableCell>
 										<TableCell component="th" scope="row">{company.companyname}</TableCell>
 										<TableCell component="th" scope="row">{company.town}</TableCell>
 										<TableCell component="th" scope="row">{company.enterednote}</TableCell>
+										<TableCell component="th" scope="row">{company.textid1}</TableCell>
+										<TableCell component="th" scope="row">{company.textid2}</TableCell>
 									</TableRow>
 								))
 								}

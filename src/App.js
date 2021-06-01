@@ -19,6 +19,9 @@ import {
   ResetPassword,
   SendVerificationEmail
 } from './components/user-forms/';
+import {
+  FrontEndWrapper
+} from './components/frontend'
 import { MMPAdmin } from './components/mmp-admin/';
 
 const App = () => {
@@ -64,6 +67,7 @@ const App = () => {
       <main>
         <Router>
           <Switch>
+            <Route path="/" component={FrontEndWrapper} />
             <Route path="/register" component={Register} />
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/reset-password" component={ResetPassword} />

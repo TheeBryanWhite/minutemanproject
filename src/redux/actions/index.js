@@ -7,6 +7,13 @@ export const setAccessToken = (data) => (dispatch) => {
   })
 }
 
+export const setEmailVerified = (data) => (dispatch) => {
+  dispatch({
+    type: types.SET_EMAIL_VERIFIED,
+    payload: data
+  })
+}
+
 export const setRefreshToken = (data) => (dispatch) => {
   dispatch({
     type: types.SET_REFRESH_TOKEN,

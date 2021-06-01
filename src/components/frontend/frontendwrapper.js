@@ -2,8 +2,6 @@
 /** @jsx jsx */
 import { Component } from 'react';
 import { css, jsx } from '@emotion/react';
-import { connect } from 'react-redux';
-import axios from 'axios';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -19,12 +17,11 @@ import { Link } from "react-router-dom";
 import { 
 	AllCompanies,
 	AllSoldiers,
-	AllText,
-	AllUsers
+	AllText
 } from './index';
 import Burger from '../burger';
 
-class TacConAdmin extends Component {
+class FrontEndWrapper extends Component {
 	constructor(props) {
 		super(props);
 
@@ -32,40 +29,9 @@ class TacConAdmin extends Component {
 			anchorEl: null
 		}
 
-		this.logoutController = this.logoutController.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		this.setAnchorEl = this.setAnchorEl.bind(this);
-	}
-
-	componentDidMount() {
-		if (!this.props.accessToken) {
-			this.props.history.push({
-				pathname: '/'
-			});
-		}
-
-		if (!this.props.isEmailVerified) {
-			this.props.history.push({
-				pathname: '/'
-			});
-		}
-	}
-
-	logoutController() {
-		const logoutUrl = 'http://localhost:3001/v1/auth/logout';
-		const self = this;
-		axios.post(logoutUrl, {
-			'refreshToken': self.props.refreshToken
-		})
-		.then(function () {
-			self.props.history.push({
-				pathname: '/'
-			});
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
 	}
 
 	handleClick(event) {
@@ -103,7 +69,7 @@ class TacConAdmin extends Component {
 										font-size: 1.5rem;
 									`}
 								>
-									Welcome, {this.props.username}! You are logged in.
+									Search The Rosters of the Battle of April 19th, 1775
 								</h1>
 							</Grid>
 							<Grid 
@@ -146,7 +112,15 @@ class TacConAdmin extends Component {
 										<MenuItem>
 											<Link
 												onClick={this.handleClose}
-												to="/mmp-admin/all-companies"
+												to="/"
+											>
+												Search
+											</Link>
+										</MenuItem>
+										<MenuItem>
+											<Link
+												onClick={this.handleClose}
+												to="/all-companies"
 											>
 												All Companies
 											</Link>
@@ -154,40 +128,18 @@ class TacConAdmin extends Component {
 										<MenuItem>
 											<Link
 												onClick={this.handleClose}
-												to="/mmp-admin/all-soldiers"
+												to="/all-towns"
 											>
-												All Soldiers
+												All Towns
 											</Link>
-										</MenuItem>
-										<MenuItem>
-											<Link
-												onClick={this.handleClose}
-												to="/mmp-admin/all-text"
-											>
-												All Texts
-											</Link>
-										</MenuItem>
-										<MenuItem>
-											<Link
-												onClick={this.handleClose}
-												to="/mmp-admin/all-users"
-											>
-												All Users
-											</Link>
-										</MenuItem>
-										<MenuItem 
-											onClick={this.logoutController}
-										>
-											Logout
 										</MenuItem>
 									</Menu>
 								</div>
 							</Grid>
 						</Grid>
 						<Switch>
-							<Route path="/mmp-admin/all-users" component={AllUsers} />
-							<Route path="/mmp-admin/all-companies" component={AllCompanies} />
 							<Route path="/mmp-admin/all-soldiers" component={AllSoldiers} />
+							<Route path="/all-companies" component={AllCompanies} />
 							<Route path="/mmp-admin/all-text" component={AllText} />
 						</Switch>
 					</Router>
@@ -197,11 +149,4 @@ class TacConAdmin extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	accessToken: state.tokenreducer.accessToken,
-	isEmailVerified: state.userreducer.isEmailVerified,
-	refreshToken: state.tokenreducer.refreshToken,
-	username: state.userreducer.username,
-})
-
-export default connect(mapStateToProps, null)(TacConAdmin)
+export default FrontEndWrapper;

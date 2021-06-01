@@ -11,7 +11,11 @@ const createSoldier = catchAsync(async (req, res) => {
 
 const getSoldiers = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['lastname', 'firstname']);
-  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  // const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const options = {
+    sortBy: 'name:desc',
+    limit: 10000,
+  };
   const result = await soldiersService.querySoldiers(filter, options);
   res.send(result);
 });
