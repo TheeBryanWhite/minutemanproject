@@ -17,6 +17,10 @@ router
   .patch(auth('manageSoldier'), validate(soldiersValidation.updateSoldier), soldiersController.updateSoldier)
   .delete(auth('manageSoldier'), validate(soldiersValidation.deleteSoldier), soldiersController.deleteSoldier);
 
+router
+  .route('/bycompany/:companyId')
+  .get(validate(soldiersValidation.getSoldiersByCompany), soldiersController.getSoldiersByCompany)
+
 module.exports = router;
 
 /**

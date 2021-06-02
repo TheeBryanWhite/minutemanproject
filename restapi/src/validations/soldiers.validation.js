@@ -45,6 +45,12 @@ const getSoldier = {
   }),
 };
 
+const getSoldiersByCompany = {
+  params: Joi.object().keys({
+    companyId: Joi.string().custom(objectId),
+  }),
+};
+
 const updateSoldier = {
   params: Joi.object().keys({
     soldierId: Joi.required().custom(objectId),
@@ -79,6 +85,7 @@ module.exports = {
   createSoldier,
   getSoldiers,
   getSoldier,
+  getSoldiersByCompany,
   updateSoldier,
   deleteSoldier,
 };

@@ -9,7 +9,7 @@ const soldiersSchema = mongoose.Schema(
       trim: true,
     },
     compnum: {
-      type: Number,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       trim: true,
     },

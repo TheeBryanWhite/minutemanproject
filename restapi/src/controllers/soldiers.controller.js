@@ -11,7 +11,6 @@ const createSoldier = catchAsync(async (req, res) => {
 
 const getSoldiers = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['lastname', 'firstname']);
-  // const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const options = {
     sortBy: 'name:desc',
     limit: 10000,
@@ -21,26 +20,35 @@ const getSoldiers = catchAsync(async (req, res) => {
 });
 
 const getSoldier = catchAsync(async (req, res) => {
-  const soldier = await soldierService.getSoldierById(req.params.soldierId);
+  const soldier = await soldiersService.getSoldierById(req.params.soldierId);
   if (!soldier) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Soldier not found');
   }
   res.send(soldier);
 });
 
+const getSoldiersByCompany = catchAsync(async (req, res) => {
+  const soldiers = await soldiersService.getSoldiersByCompany(req.params.companyId);
+  if (!soldiers) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Soldiers not found');
+  }
+  res.send(soldiers);
+});
+
 const updateSoldier = catchAsync(async (req, res) => {
-  const soldier = await soldierService.updateSoldierById(req.params.soldierId, req.body);
+  const soldier = await soldiersService.updateSoldierById(req.params.soldierId, req.body);
   res.send(soldier);
 });
 
 const deleteSoldier = catchAsync(async (req, res) => {
-  await soldierService.deleteSoldierById(req.params.soldierId);
+  await soldiersService.deleteSoldierById(req.params.soldierId);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
 module.exports = {
   createSoldier,
   getSoldiers,
+  getSoldiersByCompany,
   getSoldier,
   updateSoldier,
   deleteSoldier,
