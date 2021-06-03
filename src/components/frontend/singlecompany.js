@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import {Component} from 'react';
+import { connect } from 'react-redux';
 import { 
 	css,
 	jsx
@@ -16,6 +17,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { AllSoldiers } from './index';
+
+import { 
+	setPageTitle
+ } from '../../redux/actions';
 
 /*
 	There's a few things happening in this component that differ from the comment festival that is AllCompanies.
@@ -39,6 +44,8 @@ class Company extends Component {
 
 	componentDidMount() {
 		/*
+			The first thing happening here is a Redux action that sets the page title.
+
 			This Soldiers endpoint is a little different from the others. It queries the soldiers collection in Mongo
 			BY COMPANY ID. We want to get all the soldiers in the collection that are in this company, so we append the
 			current company's ID to the /soldiers/bycompany/:companyId endpoint.
@@ -48,6 +55,7 @@ class Company extends Component {
 			Those docs, by the way, are generated with YAML by way of a really nifty JS lib called Swagger. It all lives
 			up in the restapi folder.
 		*/
+		this.props.setPageTitle('Company Details');
 		const soldiersUrl = `http://localhost:3001/v1/soldiers/bycompany/${this.props.location.state.companyData.id}`;
 		const textsUrl = 'http://localhost:3001/v1/text';
 		const townsUrl = 'http://localhost:3001/v1/towns';
@@ -105,7 +113,6 @@ class Company extends Component {
 	
 		return(
 			<div>
-				<h2>Company Details</h2>
 				<div>
 					<TableContainer component={Paper}>
 						<Table aria-label="company table">
@@ -222,4 +229,4 @@ class Company extends Component {
 	}
 }
 
-export default Company;
+export default connect(null, {setPageTitle})(Company);

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../loading';
@@ -9,6 +10,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+
+import { 
+	setPageTitle
+ } from '../../redux/actions';
 
 /*
 	For an exhaustive breakdown of what's going on here, check out the AllCompanies component.
@@ -24,6 +29,7 @@ class AllCompanies extends Component {
 		}
 	}
 	componentDidMount() {
+		this.props.setPageTitle('All Towns');
 		const townsUrl = 'http://localhost:3001/v1/towns';
 		const self = this;
 
@@ -43,48 +49,45 @@ class AllCompanies extends Component {
 
 		return(
 			<div>
-				<h2>All Towns</h2>
-				<div>
-					<TableContainer component={Paper}>
-						<Table aria-label="all users table">
-							<TableHead>
-								<TableRow>
-									<TableCell>Town</TableCell>
-								</TableRow>
-							</TableHead>
-							<TableBody>
-								{
-								this.state.allTowns.map((town, index) => {
-									if (town.town !== 'Pursued') {
-										return (
-											<TableRow key={index}>
-												<TableCell component="th" scope="row">
-													<Link
-														to={{
-															pathname: '/town',
-															state: {
-																town: town.town,
-																townId: town.id
-															}
-														}}
-													>
-														{town.town}
-													</Link>
-												</TableCell>
-											</TableRow>
-										)
-									} else {
-										return false;
-									}
-								})
+				<TableContainer component={Paper}>
+					<Table aria-label="all users table">
+						<TableHead>
+							<TableRow>
+								<TableCell>Town</TableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{
+							this.state.allTowns.map((town, index) => {
+								if (town.town !== 'Pursued') {
+									return (
+										<TableRow key={index}>
+											<TableCell component="th" scope="row">
+												<Link
+													to={{
+														pathname: '/town',
+														state: {
+															town: town.town,
+															townId: town.id
+														}
+													}}
+												>
+													{town.town}
+												</Link>
+											</TableCell>
+										</TableRow>
+									)
+								} else {
+									return false;
 								}
-							</TableBody>
-						</Table>
-					</TableContainer>
-				</div>
+							})
+							}
+						</TableBody>
+					</Table>
+				</TableContainer>
 			</div>
 		)
 	}
 }
 
-export default AllCompanies;
+export default connect(null, {setPageTitle})(AllCompanies);

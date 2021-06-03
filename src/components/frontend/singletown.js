@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../loading';
@@ -9,6 +10,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+
+import { 
+	setPageTitle
+} from '../../redux/actions';
+import { TownSoldiers } from './index';
 
 /*
 	For an exhaustive breakdown of what's going on here, check out the SingleCompany component.
@@ -27,6 +33,7 @@ class Town extends Component {
 	}
 
 	componentDidMount() {
+		this.props.setPageTitle('Town Details');
 		const companiesUrl = 'http://localhost:3001/v1/companies';
 		const companiesByTownUrl = `http://localhost:3001/v1/companies/bytown/${this.props.location.state.townId}`;
 		const soldiersUrl = `http://localhost:3001/v1/soldiers/bytown/${this.props.location.state.townId}`;
@@ -62,10 +69,14 @@ class Town extends Component {
 			return <Loading />
 		}
 
+		let SoldiersTable;
+		if (this.state.allSoldiers.length) {
+			SoldiersTable = <TownSoldiers companyData={this.state.allCompaniesByTown} soldierData={this.state.allSoldiers} townData={this.props.location.state.town} />
+		}
+
 		return(
 			<div>
 				<div>
-					<h2>Town Details</h2>
 					<h3>List of Companies for the town of {this.props.location.state.town}</h3>
 					<div>
 						<TableContainer component={Paper}>
@@ -107,73 +118,10 @@ class Town extends Component {
 						</TableContainer>
 					</div>
 				</div>
-				<div>
-					<h3>Soldiers enlisted in companies from other towns, but showing {this.props.location.state.town} on their roster</h3>
-
-					<TableContainer component={Paper}>
-						<Table aria-label="company table">
-							<TableHead>
-								<TableRow>
-									<TableCell>Other Town</TableCell>
-									<TableCell>Soldier</TableCell>
-									<TableCell>Company</TableCell>
-								</TableRow>
-							</TableHead>
-							<TableBody>
-								{
-									this.state.allSoldiers.map((soldier, index) => {
-										return(
-											<TableRow key={index}>
-												<TableCell component="th" scope="row">
-													<p>{this.props.location.state.town}</p>
-												</TableCell>
-												<TableCell component="th" scope="row">
-													<Link
-														key={index}
-														to={{
-															pathname: '/soldier',
-															state: {
-																soldierData: soldier,
-															}
-														}}
-													>
-														{`${soldier.firstname} ${soldier.lastname}`}
-													</Link>
-												</TableCell>
-												<TableCell component="th" scope="row">
-													{
-														this.state.allCompanies.map((company, index) => {
-															if (company.id === soldier.compnum) {
-																return(
-																	<Link
-																		key={index}
-																		to={{
-																			pathname: '/company',
-																			state: {
-																				companyData: company,
-																			}
-																		}}
-																	>
-																		{company.companyname}
-																	</Link>
-																)
-															} else {
-																return false;
-															}
-														})
-													}
-												</TableCell>
-											</TableRow>
-										)
-									})
-								}
-							</TableBody>
-						</Table>
-					</TableContainer>
-				</div>
+				{SoldiersTable}
 			</div>
 		)
 	}
 }
 
-export default Town;
+export default connect(null, {setPageTitle})(Town);

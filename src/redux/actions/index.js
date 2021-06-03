@@ -14,6 +14,13 @@ export const setEmailVerified = (data) => (dispatch) => {
   })
 }
 
+export const setPageTitle = (data) => (dispatch) => {
+  dispatch({
+    type: types.SET_PAGE_TITLE,
+    payload: data
+  })
+}
+
 export const setRefreshToken = (data) => (dispatch) => {
   dispatch({
     type: types.SET_REFRESH_TOKEN,

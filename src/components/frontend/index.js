@@ -5,6 +5,7 @@ import FrontEndWrapper from './frontendwrapper';
 import SingleCompany from './singlecompany';
 import SingleSoldier from './singlesoldier';
 import SingleTown from './singletown';
+import TownSoldiers from './townsoldiers';
 
 export { 
 	AllCompanies,
@@ -13,5 +14,6 @@ export {
 	FrontEndWrapper,
 	SingleCompany,
 	SingleSoldier,
-	SingleTown
+	SingleTown,
+	TownSoldiers
 }

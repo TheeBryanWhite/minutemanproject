@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import { css, jsx } from '@emotion/react';
 import {
 	BrowserRouter as Router,
@@ -91,7 +92,7 @@ class FrontEndWrapper extends Component {
 									font-size: 1.5rem;
 								`}
 							>
-								Search The Rosters of the Battle of April 19th, 1775
+								{this.props.pageTitle}
 							</h1>
 						</Grid>
 						<Grid 
@@ -178,4 +179,20 @@ class FrontEndWrapper extends Component {
 	}
 }
 
-export default FrontEndWrapper;
+/*
+	So this is some Redux functionality. Usually an export looks like this: export default FrontEndWrapper;
+
+	But we need to dress this one up a little in order to send state properties to the store. What's happening here is:
+	We're creating a function called mapStateToProps and what it does is returns an object containing the specified redux 
+	state properties so we can connect it to the local component state object.
+
+	The export works like any other export except that we're connecting the Redux state object to the local component
+	state object with a Redux function called connect. It accepts two params: our mapStateToProps object and an object
+	containing all of the redux functions that will set properties in the redux state object. Since there are no actions
+	happening on this page, we just set this to null.
+*/
+const mapStateToProps = state => ({
+	pageTitle: state.frontendreducer.pageTitle
+});
+	
+export default connect(mapStateToProps, null)(FrontEndWrapper);
