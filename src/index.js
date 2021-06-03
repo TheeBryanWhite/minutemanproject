@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import WebfontLoader from '@dr-kobros/react-webfont-loader';
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -14,6 +13,12 @@ const config = {
   }
 };
 
+// This is our app's entry point. The only thing you're going to end up putting here are components called providers.
+// If you look below, you'll see two: Provider and WebfontLoader. Providers wrap the app in additional
+// functionality. The Provider component is for Redux and WebfontLoader kind of speaks for itself. It's
+// configuration object is above and the Store config is over in the Redux folder, which contains all of our
+// Redux functionality.
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -24,8 +29,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { Component } from 'react';
 import { css, jsx } from '@emotion/react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 import Card from '@material-ui/core/Card';
