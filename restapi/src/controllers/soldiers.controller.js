@@ -35,6 +35,14 @@ const getSoldiersByCompany = catchAsync(async (req, res) => {
   res.send(soldiers);
 });
 
+const getSoldiersByTown = catchAsync(async (req, res) => {
+  const soldiers = await soldiersService.getSoldiersByTown(req.params.townId);
+  if (!soldiers) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Soldiers not found');
+  }
+  res.send(soldiers);
+});
+
 const updateSoldier = catchAsync(async (req, res) => {
   const soldier = await soldiersService.updateSoldierById(req.params.soldierId, req.body);
   res.send(soldier);
@@ -49,6 +57,7 @@ module.exports = {
   createSoldier,
   getSoldiers,
   getSoldiersByCompany,
+  getSoldiersByTown,
   getSoldier,
   updateSoldier,
   deleteSoldier,

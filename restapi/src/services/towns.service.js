@@ -32,7 +32,7 @@ const queryAllTowns = async (filter, options) => {
  * @returns {Promise<Town>}
  */
 const getTownById = async (id) => {
-  return Town.findById(id);
+  return Towns.findById(id);
 };
 
 /**

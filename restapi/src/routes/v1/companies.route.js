@@ -17,6 +17,10 @@ router
   .patch(auth('manageCompany'), validate(companyValidation.updateCompany), companyController.updateCompany)
   .delete(auth('manageCompany'), validate(companyValidation.deleteCompany), companyController.deleteCompany);
 
+router
+  .route('/bytown/:townId')
+  .get(validate(companyValidation.getCompaniesByTown), companyController.getCompaniesByTown)
+
 module.exports = router;
 
 /**

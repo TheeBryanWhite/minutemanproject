@@ -51,6 +51,12 @@ const getSoldiersByCompany = {
   }),
 };
 
+const getSoldiersByTown = {
+  params: Joi.object().keys({
+    townId: Joi.string().custom(objectId),
+  }),
+};
+
 const updateSoldier = {
   params: Joi.object().keys({
     soldierId: Joi.required().custom(objectId),

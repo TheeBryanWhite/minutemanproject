@@ -4,7 +4,7 @@ const { toJSON, paginate } = require('./plugins');
 const townsSchema = mongoose.Schema(
   {
     id: {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       trim: true,
       unique: true

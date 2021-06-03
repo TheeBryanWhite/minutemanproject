@@ -44,6 +44,15 @@ const getSoldierById = async (id) => {
 };
 
 /**
+ * Get soldier by town ID
+ * @param {ObjectId} id
+ * @returns {Promise<Soldier>}
+ */
+ const getSoldiersByTown = async (id) => {
+  return Soldiers.find({othertown: id});
+};
+
+/**
  * Update soldier by id
  * @param {ObjectId} soldierId
  * @param {Object} updateBody
@@ -81,6 +90,7 @@ module.exports = {
   querySoldiers,
   getSoldierById,
   getSoldiersByCompany,
+  getSoldiersByTown,
   updateSoldierById,
   deleteSoldierById,
 };

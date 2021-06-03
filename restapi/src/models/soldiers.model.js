@@ -49,7 +49,7 @@ const soldiersSchema = mongoose.Schema(
       trim: true,
     },
     othertown: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       trim: true,
     },

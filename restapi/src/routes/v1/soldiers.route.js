@@ -21,6 +21,10 @@ router
   .route('/bycompany/:companyId')
   .get(validate(soldiersValidation.getSoldiersByCompany), soldiersController.getSoldiersByCompany)
 
+router
+  .route('/bytown/:townId')
+  .get(validate(soldiersValidation.getSoldiersByTown), soldiersController.getSoldiersByTown)
+
 module.exports = router;
 
 /**

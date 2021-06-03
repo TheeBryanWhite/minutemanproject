@@ -14,12 +14,12 @@ const companySchema = mongoose.Schema(
       trim: true,
     },
     town: {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       trim: true,
     },
     entered: {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
 	    required: true,
       trim: true,
     },
@@ -29,12 +29,12 @@ const companySchema = mongoose.Schema(
       trim: true,
     },
 	  textid1: {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       trim: true,
     },
 	  textid2: {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       trim: true,
     }

@@ -25,6 +25,12 @@ const getCompanies = {
   }),
 };
 
+const getCompaniesByTown = {
+  params: Joi.object().keys({
+    townId: Joi.string().custom(objectId),
+  }),
+};
+
 const getCompany = {
   params: Joi.object().keys({
     companyId: Joi.string().custom(objectId),

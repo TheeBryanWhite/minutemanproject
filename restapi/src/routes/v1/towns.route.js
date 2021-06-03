@@ -13,7 +13,7 @@ router
 
 router
   .route('/:townId')
-  .get(auth('getTown'), validate(townsValidation.getTown), townsController.getTown)
+  .get(validate(townsValidation.getTown), townsController.getTown)
   .patch(auth('manageTown'), validate(townsValidation.updateTown), townsController.updateTown)
   .delete(auth('manageTown'), validate(townsValidation.deleteTown), townsController.deleteTown);
 

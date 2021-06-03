@@ -26,6 +26,15 @@ const queryCompanies = async (filter, options) => {
 };
 
 /**
+ * Get companies by town ID
+ * @param {ObjectId} id
+ * @returns {Promise<Company>}
+ */
+ const getCompaniesByTown = async (id) => {
+  return Company.find({town: id});
+};
+
+/**
  * Get company by id
  * @param {ObjectId} id
  * @returns {Promise<Company>}
@@ -70,6 +79,7 @@ const deleteCompanyById = async (companyId) => {
 module.exports = {
   createCompany,
   queryCompanies,
+  getCompaniesByTown,
   getCompanyById,
   updateCompanyById,
   deleteCompanyById,

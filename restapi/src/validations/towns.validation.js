@@ -17,7 +17,7 @@ const getAllTowns = {
 
 const getTown = {
   params: Joi.object().keys({
-    id: Joi.string().custom(objectId),
+    townId: Joi.string().custom(objectId),
   }),
 };
 
