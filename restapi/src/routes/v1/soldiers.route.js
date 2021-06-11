@@ -12,6 +12,10 @@ router
   .get(validate(soldiersValidation.getSoldiers), soldiersController.getSoldiers);
 
 router
+  .route('/bycomplex')
+  .get(validate(soldiersValidation.getSoldiersByComplex), soldiersController.getSoldiersByComplex);
+
+router
   .route('/:soldierId')
   .get(validate(soldiersValidation.getSoldier), soldiersController.getSoldier)
   .patch(auth('manageSoldier'), validate(soldiersValidation.updateSoldier), soldiersController.updateSoldier)
@@ -19,11 +23,17 @@ router
 
 router
   .route('/bycompany/:companyId')
-  .get(validate(soldiersValidation.getSoldiersByCompany), soldiersController.getSoldiersByCompany)
+  .get(validate(soldiersValidation.getSoldiersByCompany), soldiersController.getSoldiersByCompany);
+
+router.route('/bytown/:townId').get(validate(soldiersValidation.getSoldiersByTown), soldiersController.getSoldiersByTown);
 
 router
-  .route('/bytown/:townId')
-  .get(validate(soldiersValidation.getSoldiersByTown), soldiersController.getSoldiersByTown)
+  .route('/bylastname/:lastname')
+  .get(validate(soldiersValidation.getSoldiersByLastName), soldiersController.getSoldiersByLastName);
+
+router
+  .route('/byfirstname/:firstname')
+  .get(validate(soldiersValidation.getSoldiersByFirstName), soldiersController.getSoldiersByFirstName);
 
 module.exports = router;
 

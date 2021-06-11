@@ -89,14 +89,14 @@ const App = () => {
         */}
         <Router>
           <Switch>
-            <Route path="/" component={FrontEndWrapper} />
-            <Route path="/register" component={Register} />
-            <Route path="/forgot-password" component={ForgotPassword} />
-            <Route path="/reset-password" component={ResetPassword} />
-            <Route path="/send-verification" component={SendVerificationEmail} />
-            <Route path="/password-sent" component={PasswordSent} />
-            <Route path="/mmp-admin" component={MMPAdmin} />
-            <Route path="/adm-lgin" component={Login} />
+            <Route exact path="/" component={FrontEndWrapper} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+            <Route exact path="/reset-password" component={ResetPassword} />
+            <Route exact path="/send-verification" component={SendVerificationEmail} />
+            <Route exact path="/password-sent" component={PasswordSent} />
+            <Route exact path="/mmp-admin" component={MMPAdmin} />
+            <Route exact path="/adm-lgin" component={Login} />
           </Switch>
         </Router>
       </main>

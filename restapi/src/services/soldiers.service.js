@@ -39,8 +39,8 @@ const getSoldierById = async (id) => {
  * @param {ObjectId} id
  * @returns {Promise<Soldier>}
  */
- const getSoldiersByCompany = async (id) => {
-  return Soldiers.find({compnum: id});
+const getSoldiersByCompany = async (id) => {
+  return Soldiers.find({ compnum: id });
 };
 
 /**
@@ -48,8 +48,61 @@ const getSoldierById = async (id) => {
  * @param {ObjectId} id
  * @returns {Promise<Soldier>}
  */
- const getSoldiersByTown = async (id) => {
-  return Soldiers.find({othertown: id});
+const getSoldiersByTown = async (id) => {
+  return Soldiers.find({ othertown: id });
+};
+
+/**
+ * Get soldier by last name
+ * @param {ObjectId} id
+ * @returns {Promise<Soldier>}
+ */
+const getSoldiersByLastName = async (name) => {
+  const pattern = new RegExp(name, 'i');
+  return Soldiers.find({ lastname: pattern });
+};
+
+/**
+ * Get soldier by first name
+ * @param {ObjectId} id
+ * @returns {Promise<Soldier>}
+ */
+const getSoldiersByFirstName = async (name) => {
+  const pattern = new RegExp(name, 'i');
+  return Soldiers.find({ firstname: pattern });
+};
+
+/**
+ * Get soldier by complex
+ * @param {ObjectId} companyId
+ * @param {String} fistname
+ * @param {String} lastname
+ * @param {ObjectId} townId
+ * @returns {Promise<Soldiers>}
+ */
+const getSoldiersByComplex = async (companyId, firstname, lastname, townId) => {
+  const fNamePattern = new RegExp(firstname, 'i');
+  const lNamePattern = new RegExp(lastname, 'i');
+
+  let inputBody = {};
+
+  if (companyId) {
+    inputBody['compnum'] = companyId;
+  }
+
+  if (firstname) {
+    inputBody['firstname'] = fNamePattern;
+  }
+
+  if (lastname) {
+    inputBody['lastname'] = lNamePattern;
+  }
+
+  if (townId) {
+    inputBody['townId'] = townId;
+  }
+
+  return Soldiers.find(inputBody);
 };
 
 /**
@@ -63,7 +116,7 @@ const updateSoldierById = async (soldierId, updateBody) => {
   if (!soldier) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Soldier not found');
   }
-  if (updateBody.soldiername && (await Soldier.soldiername(updateBody.soldiername, soldierId))) {
+  if (updateBody.soldiername && (await soldier.soldiername(updateBody.soldiername, soldierId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Company name is already taken');
   }
   Object.assign(soldier, updateBody);
@@ -77,7 +130,7 @@ const updateSoldierById = async (soldierId, updateBody) => {
  * @returns {Promise<Soldier>}
  */
 const deleteSoldierById = async (soldierId) => {
-  const soldier = await getCompanyById(soldierId);
+  const soldier = await getSoldierById(soldierId);
   if (!soldier) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Soldier not found');
   }
@@ -91,6 +144,9 @@ module.exports = {
   getSoldierById,
   getSoldiersByCompany,
   getSoldiersByTown,
+  getSoldiersByFirstName,
+  getSoldiersByLastName,
+  getSoldiersByComplex,
   updateSoldierById,
   deleteSoldierById,
 };

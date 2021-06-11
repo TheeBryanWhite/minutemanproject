@@ -5,7 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { soldiersService } = require('../services');
 
 const createSoldier = catchAsync(async (req, res) => {
-  const user = await soldierService.createUser(req.body);
+  const soldier = await soldiersService.createUser(req.body);
   res.status(httpStatus.CREATED).send(soldier);
 });
 
@@ -43,6 +43,35 @@ const getSoldiersByTown = catchAsync(async (req, res) => {
   res.send(soldiers);
 });
 
+const getSoldiersByLastName = catchAsync(async (req, res) => {
+  const soldiers = await soldiersService.getSoldiersByLastName(req.params.lastname);
+  if (!soldiers) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Soldiers not found');
+  }
+  res.send(soldiers);
+});
+
+const getSoldiersByFirstName = catchAsync(async (req, res) => {
+  const soldiers = await soldiersService.getSoldiersByFirstName(req.params.firstname);
+  if (!soldiers) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Soldiers not found');
+  }
+  res.send(soldiers);
+});
+
+const getSoldiersByComplex = catchAsync(async (req, res) => {
+  const soldiers = await soldiersService.getSoldiersByComplex(
+    req.query.company,
+    req.query.firstname,
+    req.query.lastname,
+    req.query.town
+  );
+  if (!soldiers) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Soldiers not found');
+  }
+  res.send(soldiers);
+});
+
 const updateSoldier = catchAsync(async (req, res) => {
   const soldier = await soldiersService.updateSoldierById(req.params.soldierId, req.body);
   res.send(soldier);
@@ -58,6 +87,9 @@ module.exports = {
   getSoldiers,
   getSoldiersByCompany,
   getSoldiersByTown,
+  getSoldiersByLastName,
+  getSoldiersByFirstName,
+  getSoldiersByComplex,
   getSoldier,
   updateSoldier,
   deleteSoldier,

@@ -36,6 +36,16 @@ const getTownById = async (id) => {
 };
 
 /**
+ * Get town by name
+ * @param {ObjectId} id
+ * @returns {Promise<Town>}
+ */
+ const getTownsByName = async (name) => {
+  const pattern = new RegExp(name,'i');
+  return Towns.find({town: pattern});
+};
+
+/**
  * Update text by id
  * @param {ObjectId} townId
  * @param {Object} updateBody
@@ -68,6 +78,7 @@ const deleteTownById = async (townId) => {
 module.exports = {
   createTown,
   queryAllTowns,
+  getTownsByName,
   getTownById,
   updateTownById,
   deleteTownById,

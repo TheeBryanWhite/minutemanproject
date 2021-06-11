@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { Component } from 'react';
+import React,{ Component } from 'react';
 import { css, jsx } from '@emotion/react';
 import { connect } from 'react-redux';
 import axios from 'axios';

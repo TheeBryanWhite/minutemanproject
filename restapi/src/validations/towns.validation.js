@@ -15,6 +15,12 @@ const getAllTowns = {
   }),
 };
 
+const getTownsByName = {
+  query: Joi.object().keys({
+    townname: Joi.string()
+  }),
+};
+
 const getTown = {
   params: Joi.object().keys({
     townId: Joi.string().custom(objectId),
@@ -42,6 +48,7 @@ const deleteTown = {
 module.exports = {
   createTown,
   getAllTowns,
+  getTownsByName,
   getTown,
   updateTown,
   deleteTown,

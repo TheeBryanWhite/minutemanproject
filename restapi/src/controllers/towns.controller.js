@@ -20,6 +20,14 @@ const getAllTowns = catchAsync(async (req, res) => {
   res.send(result);
 });
 
+const getTownsByName = catchAsync(async (req, res) => {
+  const towns = await townsService.getTownsByName(req.params.townname);
+  if (!towns) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Towns not found');
+  }
+  res.send(towns);
+});
+
 const getTown = catchAsync(async (req, res) => {
   const town = await townsService.getTownById(req.params.townId);
   if (!town) {
@@ -41,6 +49,7 @@ const deleteTown = catchAsync(async (req, res) => {
 module.exports = {
   createTown,
   getAllTowns,
+  getTownsByName,
   getTown,
   updateTown,
   deleteTown,

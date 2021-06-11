@@ -19,7 +19,11 @@ router
 
 router
   .route('/bytown/:townId')
-  .get(validate(companyValidation.getCompaniesByTown), companyController.getCompaniesByTown)
+  .get(validate(companyValidation.getCompaniesByTown), companyController.getCompaniesByTown);
+
+router
+  .route('/byname/:companyname')
+  .get(validate(companyValidation.getCompaniesByName), companyController.getCompaniesByName);
 
 module.exports = router;
 

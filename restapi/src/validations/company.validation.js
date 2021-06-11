@@ -31,9 +31,15 @@ const getCompaniesByTown = {
   }),
 };
 
+const getCompaniesByName = {
+  params: Joi.object().keys({
+    companyname: Joi.string(),
+  }),
+};
+
 const getCompany = {
   params: Joi.object().keys({
-    companyId: Joi.string().custom(objectId),
+    companyId: Joi.string(),
   }),
 };
 
@@ -63,6 +69,8 @@ const deleteCompany = {
 module.exports = {
   createCompany,
   getCompanies,
+  getCompaniesByTown,
+  getCompaniesByName,
   getCompany,
   updateCompany,
   deleteCompany,

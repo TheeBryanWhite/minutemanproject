@@ -17,6 +17,10 @@ router
   .patch(auth('manageTown'), validate(townsValidation.updateTown), townsController.updateTown)
   .delete(auth('manageTown'), validate(townsValidation.deleteTown), townsController.deleteTown);
 
+router
+  .route('/byname/:townname')
+  .get(validate(townsValidation.getTownsByName), townsController.getTownsByName);
+
 module.exports = router;
 
 /**

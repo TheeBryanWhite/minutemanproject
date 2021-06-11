@@ -26,6 +26,16 @@ const queryCompanies = async (filter, options) => {
 };
 
 /**
+ * Get company by name
+ * @param {ObjectId} id
+ * @returns {Promise<Company>}
+ */
+ const getCompaniesByName = async (name) => {
+  const pattern = new RegExp(name,'i');
+  return Company.find({companyname: pattern});
+};
+
+/**
  * Get companies by town ID
  * @param {ObjectId} id
  * @returns {Promise<Company>}
@@ -79,6 +89,7 @@ const deleteCompanyById = async (companyId) => {
 module.exports = {
   createCompany,
   queryCompanies,
+  getCompaniesByName,
   getCompaniesByTown,
   getCompanyById,
   updateCompanyById,

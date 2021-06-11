@@ -28,6 +28,14 @@ const getCompaniesByTown = catchAsync(async (req, res) => {
   res.send(companies);
 });
 
+const getCompaniesByName = catchAsync(async (req, res) => {
+  const companies = await companyService.getCompaniesByName(req.params.companyname);
+  if (!companies) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Companies not found');
+  }
+  res.send(companies);
+});
+
 const getCompany = catchAsync(async (req, res) => {
   const company = await companyService.getCompanyById(req.params.companyId);
   if (!company) {
@@ -50,6 +58,7 @@ module.exports = {
   createCompany,
   getCompanies,
   getCompaniesByTown,
+  getCompaniesByName,
   getCompany,
   updateCompany,
   deleteCompany,

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import Loading from '../loading';
 import Table from '@material-ui/core/Table';

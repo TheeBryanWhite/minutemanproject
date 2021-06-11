@@ -57,6 +57,27 @@ const getSoldiersByTown = {
   }),
 };
 
+const getSoldiersByLastName = {
+  params: Joi.object().keys({
+    lastname: Joi.string(),
+  }),
+};
+
+const getSoldiersByFirstName = {
+  params: Joi.object().keys({
+    firstname: Joi.string(),
+  }),
+};
+
+const getSoldiersByComplex = {
+  query: Joi.object().keys({
+    company: Joi.any().optional(),
+    firstname: Joi.any().optional(),
+    lastname: Joi.any().optional(),
+    town: Joi.any().optional(),
+  }),
+};
+
 const updateSoldier = {
   params: Joi.object().keys({
     soldierId: Joi.required().custom(objectId),
@@ -92,6 +113,10 @@ module.exports = {
   getSoldiers,
   getSoldier,
   getSoldiersByCompany,
+  getSoldiersByTown,
+  getSoldiersByLastName,
+  getSoldiersByFirstName,
+  getSoldiersByComplex,
   updateSoldier,
   deleteSoldier,
 };

@@ -1,6 +1,6 @@
 import { types } from "../constants/types";
 const initialState = {
-	pageTitle: 'Search The Rosters of the Battle of April 19th, 1775',
+	pageTitle: null,
 };
 
 const frontendreducer = (state = initialState, action) => {

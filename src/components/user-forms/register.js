@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { Component } from 'react';
+import React,{ Component } from 'react';
 import { css, jsx } from '@emotion/react';
 import { Link } from "react-router-dom";
 import debounce from 'lodash.debounce';
